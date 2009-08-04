@@ -85,7 +85,6 @@ class MailChimp
   def lists
     params = {}
     ret = call_server 'lists', params
-    puts ret
     ret
   end
 
@@ -100,7 +99,7 @@ class MailChimp
     path = "/1.1/?output=json&method=#{method}"
     params[:apikey] = @api unless method == "login"
     data = gen_params_list(params)
-    puts "http://#{url}#{path}&#{data}"
+    #puts "http://#{url}#{path}&#{data}"
     http = Net::HTTP.new(url)
     result = http.post(path, data)
     begin
@@ -128,13 +127,4 @@ class MailChimp
   end
 
 end
-
-#mc = MailChimp.new
-#mc.login 'bcaccinolo', 'aden'
-#puts mc.ping
-#mc.lists
-#mc.list_members "905f5c89d5"
-
-
-
 

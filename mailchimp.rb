@@ -1,4 +1,5 @@
-
+# For the API 1.1
+#
 require "rubygems"
 require 'net/http'
 require 'uri'
@@ -20,7 +21,8 @@ class MailChimp
   end
 
   def campaign_create list_id, from_email, from_name, subject, content
-    params = {:options => {:list_id => list_id, :subject => subject, :from_name => from_name, :from_email => from_email}, 
+    params = {:options => {:list_id => list_id, :subject => subject, 
+              :from_name => from_name, :from_email => from_email}, 
               :type => "regular", :content => content}
     ret = call_server 'campaignCreate', params
     puts ret
@@ -68,7 +70,8 @@ class MailChimp
   end
 
   def list_subscribe list_id, email
-    params = {:id => list_id, :email_address => email, :merge_vars => {'FIRST' => '', 'LAST' => ''} , :double_optin => false}
+    params = {:id => list_id, :email_address => email, 
+              :merge_vars => {'FIRST' => '', 'LAST' => ''} , :double_optin => false}
     ret = call_server 'listSubscribe', params
     ret
   end

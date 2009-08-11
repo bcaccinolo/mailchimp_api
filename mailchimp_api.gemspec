@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mailchimp_api}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Benoit Nichols"]
-  s.date = %q{2009-08-05}
+  s.authors = ["Benoit Caccinolo"]
+  s.date = %q{2009-08-11}
   s.description = %q{TODO}
-  s.email = %q{benoit@technicalpickles.com}
+  s.email = %q{benoit.caccinolo@gmail.com}
   s.extra_rdoc_files = [
     "README"
   ]
@@ -20,9 +20,10 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/mailchimp.rb",
+     "mailchimp_api.gemspec",
      "test/test_mc.rb"
   ]
-  s.homepage = %q{http://github.com/technicalpickles/the-perfect-gem}
+  s.homepage = %q{http://ruready.tumblr.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.4}

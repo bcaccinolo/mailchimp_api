@@ -3,11 +3,11 @@
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "Mailchimp_api"
+    gemspec.name = "mailchimp_api"
     gemspec.summary = "Summarize your gem"
     gemspec.description = "Describe your gem"
-    gemspec.email = "Benoit Caccinolo"
-    gemspec.homepage = "http://github.com/technicalpickles/the-perfect-gem"
+    gemspec.email = "benoit.caccinolo@gmail.com"
+    gemspec.homepage = "http://ruready.tumblr.com"
     gemspec.description = "TODO"
     gemspec.authors = ["Benoit Caccinolo"]
   end

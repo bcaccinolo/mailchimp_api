@@ -2,7 +2,7 @@ require "test/unit"
 require "lib/mailchimp_api"
 
 LOGIN=""
-PWD=""
+PWD="" 
 
 class TestMailChimp < Test::Unit::TestCase
 
@@ -50,8 +50,9 @@ class TestMailChimp < Test::Unit::TestCase
   end
 
   def test_list_batch_subscribe
-    ret = @@mc.list_batch_subscribe(@@list_id, [ {"EMAIL" => "benoit_test4@gmail.com"} ]) 
-    assert(ret["success_count"] == 1, ret.to_yaml)
+    ret = @@mc.list_batch_subscribe(@@list_id, [ {"EMAIL" => "benoit_test4@gmail.com"}, 
+                                                 {"EMAIL" => "benoit_test5@gmail.com"}]) 
+    assert(ret["success_count"] == 2, ret.to_yaml)
   end
 
   def test_list_batch_unsubscribe

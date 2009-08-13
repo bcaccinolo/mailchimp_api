@@ -7,6 +7,8 @@ require 'uri'
 require "json"
 require 'yaml'
 
+API_VERSION="1.2" # also works with 1.1
+
 class MailChimp
 
   attr_accessor :api
@@ -108,7 +110,7 @@ class MailChimp
 
   def call_server method , params={}
     url = "api.mailchimp.com"
-    path = "/1.1/?output=json&method=#{method}"
+    path = "/#{API_VERSION}/?output=json&method=#{method}"
     params[:apikey] = @api unless method == "login"
     data = gen_params_list(params)
     #puts "http://#{url}#{path}&#{data}"

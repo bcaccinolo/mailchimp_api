@@ -126,11 +126,17 @@ class MailChimp
     params.map do |key, value|
       if value.class == Hash
         value.map do |k, v| 
-         "#{key}[#{k}]=#{v}" 
-        end.join '&'
+          "#{key}[#{k}]=#{v}" 
+        end.join('&')
       elsif value.class == Array
         value.map do |v|
-         "#{key}[]=#{v}" 
+          if v.class == Hash
+            v.map do |k,v|
+              "#{key}[][#{k}]=#{v}" 
+            end.join '&'
+          else
+            "#{key}[]=#{v}" 
+          end
         end.join '&'
       else
         "#{key}=#{value}"

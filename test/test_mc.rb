@@ -1,5 +1,5 @@
 require "test/unit"
-require "lib/mailchimp"
+require "lib/mailchimp_api"
 
 LOGIN=""
 PWD=""
@@ -24,7 +24,7 @@ class TestMailChimp < Test::Unit::TestCase
   #end
 
   def test_ping
-    ret = @mc.ping
+    ret = @@mc.ping
     assert ret == true
   end
   
@@ -42,22 +42,22 @@ class TestMailChimp < Test::Unit::TestCase
   end
 
   def test_list_subscribe
-    assert @mc.list_subscribe(@list_id, "benoit_test@gmail.com")
+    assert @@mc.list_subscribe(@@list_id, "benoit_test@gmail.com")
   end
 
   def test_list_unsubscribe
-    assert @mc.list_unsubscribe(@list_id, "benoit_test@gmail.com")
+    assert @@mc.list_unsubscribe(@@list_id, "benoit_test@gmail.com")
   end
 
   def test_list_batch_subscribe
-    ret = @mc.list_batch_subscribe(@list_id, [ ["EMAIL" => "benoit_test4@gmail.com"] ]) 
-    assert(ret["success_count"] == "1", ret.to_yaml)
+    ret = @@mc.list_batch_subscribe(@@list_id, [ {"EMAIL" => "benoit_test4@gmail.com"} ]) 
+    assert(ret["success_count"] == 1, ret.to_yaml)
   end
 
   def test_list_batch_unsubscribe
-    @mc.list_subscribe(@list_id, "benoit_test1@gmail.com")
-    @mc.list_subscribe(@list_id, "benoit_test2@gmail.com")
-    ret = @mc.list_batch_unsubscribe(@list_id, ["benoit_test1@gmail.com", "benoit_test2@gmail.com"])
+    @@mc.list_subscribe(@@list_id, "benoit_test1@gmail.com")
+    @@mc.list_subscribe(@@list_id, "benoit_test2@gmail.com")
+    ret = @@mc.list_batch_unsubscribe(@@list_id, ["benoit_test1@gmail.com", "benoit_test2@gmail.com"])
     assert(ret["success_count"] == 2, ret.to_yaml)
   end
 
@@ -91,9 +91,8 @@ class TestMailChimp < Test::Unit::TestCase
     campaign_id = ret
 
     ret = @@mc.campaign_send_test(campaign_id, ["benoit.caccinolo@gmail.com"])
-    puts ret
     assert ret
-    @@mc.campaign_delete campaign_id
+    ret = @@mc.campaign_delete campaign_id
   end
 
 end

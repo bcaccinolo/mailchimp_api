@@ -1,6 +1,24 @@
 Mailchimp API
 ============
-Author: Benoit Caccinolo
+
+A simple gem to connect with the MailChimp API 1.2  
+
+Author 
+======
+Benoit Caccinolo (benoit.caccinolo@gmail.com)
+
+Installation
+============
+
+gem sources -a http://gems.github.com (you only have to do this once
+gem install bcaccinolo-mailchimp_api
+
+
+Run the unit tests
+==================
+
+rake test
+
 
 
 

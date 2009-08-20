@@ -16,7 +16,12 @@ class MailChimp
   # tested
   def login username, password
     ret = call_server 'login', {:username => username, :password => password}
-    @api = ret.slice(1, ret.size-2) if ret.class == String
+    if ret.class == String
+      @api = ret.slice(1, ret.size-2) 
+      return true
+    else 
+      return false
+    end
   end
 
   # tested

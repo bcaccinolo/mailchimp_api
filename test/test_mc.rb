@@ -22,6 +22,12 @@ class TestMailChimp < Test::Unit::TestCase
 
   #def teardown
   #end
+  #
+  def test_login
+    mc = MailChimp.new
+    ret = mc.login LOGIN, PWD
+    assert ret
+  end
 
   def test_ping
     ret = @@mc.ping

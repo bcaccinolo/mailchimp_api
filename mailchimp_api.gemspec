@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mailchimp_api}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Benoit Caccinolo"]
-  s.date = %q{2009-08-11}
+  s.date = %q{2009-09-23}
   s.description = %q{TODO}
   s.email = %q{benoit.caccinolo@gmail.com}
   s.extra_rdoc_files = [
@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://ruready.tumblr.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Summarize your gem}
   s.test_files = [
     "test/test_mc.rb"

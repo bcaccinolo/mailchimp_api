@@ -7,8 +7,6 @@ require 'uri'
 require "json"
 require 'yaml'
 
-API_VERSION="1.2" # also works with 1.1
-
 class MailChimp
 
   attr_accessor :api
@@ -16,12 +14,7 @@ class MailChimp
   # tested
   def login username, password
     ret = call_server 'login', {:username => username, :password => password}
-    if ret.class == String
-      @api = ret.slice(1, ret.size-2) 
-      return true
-    else 
-      return false
-    end
+    @api = ret.slice(1, ret.size-2) if ret.class == String
   end
 
   # tested
@@ -31,10 +24,10 @@ class MailChimp
   end
 
   # tested
-  def campaign_create list_id, from_email, from_name, subject, content
+  def campaign_create list_id, from_email, from_name, subject, content, generate_text = true
     params = {:options => {:list_id => list_id, :subject => subject, 
               :from_name => from_name, :from_email => from_email}, 
-              :type => "regular", :content => {"html" => content} }
+              :type => "regular", :content => content, :generate_text => generate_text}
     ret = call_server 'campaignCreate', params
     if ret.class == String
       ret = ret.slice(1, ret.size-2) 
@@ -115,10 +108,10 @@ class MailChimp
 
   def call_server method , params={}
     url = "api.mailchimp.com"
-    path = "/#{API_VERSION}/?output=json&method=#{method}"
+    path = "/1.1/?output=json&method=#{method}"
     params[:apikey] = @api unless method == "login"
     data = gen_params_list(params)
-    #puts "http://#{url}#{path}&#{data}"
+    #puts ">>> http://#{url}#{path}&#{data}"
     http = Net::HTTP.new(url)
     result = http.post(path, data)
     begin
@@ -133,20 +126,14 @@ class MailChimp
     params.map do |key, value|
       if value.class == Hash
         value.map do |k, v| 
-          "#{key}[#{k}]=#{v}" 
-        end.join('&')
+         "#{key}[#{k}]=#{CGI::escape(v.to_s)}" 
+        end.join '&'
       elsif value.class == Array
         value.map do |v|
-          if v.class == Hash
-            v.map do |k,v|
-              "#{key}[][#{k}]=#{v}" 
-            end.join '&'
-          else
-            "#{key}[]=#{v}" 
-          end
+         "#{key}[]=#{CGI::escape(vi.to_s)}"
         end.join '&'
       else
-        "#{key}=#{value}"
+        "#{key}=#{CGI::escape(value.to_s)}"
       end 
     end.join '&'
   end
